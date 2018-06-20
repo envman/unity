@@ -5,10 +5,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	private float speed = 10.0f;
-	private Rigidbody rb;
+	// private Rigidbody rb;
+	public Material seen;
+
+	private Material existing;
+	// private Renderer renderer;
 
 	void Start () {
-		rb = GetComponent<Rigidbody>();
+		// remderer = GetComponent<Renderer>();
+		existing = GetComponent<Renderer>().material;
+		// rb = GetComponent<Rigidbody>();
+	}
+
+	void OnMouseOver() {
+		GetComponent<Renderer>().material = seen;
+	}
+
+	void OnMouseExit() {
+		GetComponent<Renderer>().material = existing;
 	}
 
 	void Update () {

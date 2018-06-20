@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\GuardController.cs" />
     <Compile Include="Assets\Scripts\NavPoint.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <None Include="Assets\Shaders\Normal.shader" />
+    <None Include="Assets\Shaders\Outline.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Repos/unity/Proto 01/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
