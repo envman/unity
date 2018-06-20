@@ -36,4 +36,11 @@ public class GuardController : MonoBehaviour {
 		// 	}
 		// }
 	}
+
+	void OnMouseDown() {
+		if (Input.GetMouseButton(0)) {
+			Debug.Log("GUARD");
+			// drawCone = true;
+		}
+	}
 }

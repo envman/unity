@@ -20,6 +20,7 @@ public class FieldOfView : MonoBehaviour {
 	public float edgeDistanceThreshold;
 
 	public List<Transform> visibleTargets = new List<Transform>();
+	private bool drawCone = false;
 
 	void Start() {
 		viewMesh = new Mesh();
@@ -29,7 +30,11 @@ public class FieldOfView : MonoBehaviour {
 	}
 
 	void Update() {
-		DrawFieldOfView();
+		if (drawCone) {
+			DrawFieldOfView();
+		} else {
+			viewMesh.Clear();
+		}
 	}
 
 	EdgeInfo FindEdge(ViewCastInfo min, ViewCastInfo max) {
@@ -167,6 +172,19 @@ public class FieldOfView : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	void OnMouseOver() {
+		if (Input.GetMouseButtonDown(1)) {
+			var others = FindObjectsOfType<FieldOfView>();
+			Debug.Log(others.Length);
+
+			foreach(var fov in others) {
+				fov.drawCone = false;
+			}
+
+			drawCone = true;
 		}
 	}
 
