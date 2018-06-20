@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GuardController.cs" />
+    <Compile Include="Assets\Scripts\NavPoint.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Repos/unity/Proto 01/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
