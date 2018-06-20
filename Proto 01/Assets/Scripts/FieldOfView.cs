@@ -32,10 +32,6 @@ public class FieldOfView : MonoBehaviour {
 		DrawFieldOfView();
 	}
 
-	// void LateUpdate() {
-	// 	DrawFieldOfView();
-	// }
-
 	EdgeInfo FindEdge(ViewCastInfo min, ViewCastInfo max) {
 		float minAngle = min.angle;
 		float maxAngle = max.angle;
@@ -143,6 +139,8 @@ public class FieldOfView : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSeconds (delay);
 			FindVisibleTargets();
+
+
 		}
 	}
 
@@ -161,6 +159,12 @@ public class FieldOfView : MonoBehaviour {
 				if (!Physics.Raycast(transform.position, dirToTarget, distanceToTarget, obstacleMask)) {
 					// Can See!!
 					visibleTargets.Add(target);
+					GameObject obj = target.gameObject;
+					PlayerController controller = obj.GetComponent<PlayerController>();
+
+					if (controller != null) {
+						controller.seenTime = Time.time;
+					}
 				}
 			}
 		}

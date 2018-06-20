@@ -5,24 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	private float speed = 10.0f;
-	// private Rigidbody rb;
-	public Material seen;
 
+	public Material seen;
+	public float seenTime;
 	private Material existing;
-	// private Renderer renderer;
 
 	void Start () {
-		// remderer = GetComponent<Renderer>();
 		existing = GetComponent<Renderer>().material;
-		// rb = GetComponent<Rigidbody>();
-	}
-
-	void OnMouseOver() {
-		GetComponent<Renderer>().material = seen;
-	}
-
-	void OnMouseExit() {
-		GetComponent<Renderer>().material = existing;
 	}
 
 	void Update () {
@@ -34,15 +23,11 @@ public class PlayerController : MonoBehaviour {
 		transform.Translate(strafe, 0, translation);
 	}
 
-	void FixedUpdate() {
-
-
-
-		// float moveHorizontal = Input.GetAxis("Horizontal");
-		// float moveVertical = Input.GetAxis("Vertical");
-		//
-		// Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-		//
-		// rb.AddForce(movement * speed);
+	void LateUpdate() {
+		if (seenTime > 0 && seenTime + .5f > Time.time) {
+			GetComponent<Renderer>().material = seen;
+		} else {
+			GetComponent<Renderer>().material = existing;
+		}
 	}
 }
