@@ -27,21 +27,26 @@ public class KeyPadContoller : MonoBehaviour {
 
 	public void Pressed(string val) {
 		code = code + val;
-		display.text = code;
 
-		Check();
+		Check(code);
 	}
 
 	public void Reset() {
 		code = "";
 	}
 
-	void Check() {
-		if (code == pass) {
+	public bool Check(string current) {
+		display.text = current;
+
+		if (current == pass) {
 			display.text = "Correct!";
 
 			door.Open();
 			Hide();
+
+			return true;
 		}
+
+		return false;
 	}
 }

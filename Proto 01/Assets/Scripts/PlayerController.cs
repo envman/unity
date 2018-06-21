@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public Material seen;
 	public float seenTime;
 	private Material existing;
+	public bool inNaughtyZone = false;
 
 	void Start () {
 		existing = GetComponent<Renderer>().material;

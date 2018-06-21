@@ -8,6 +8,8 @@ public class GuardController : MonoBehaviour {
 	public Camera cam;
 	public UnityEngine.AI.NavMeshAgent agent;
 	public NavPoint currentPoint;
+	public FieldOfView fov;
+	public PlayerController hunted;
 
 	// Use this for initialization
 	void Start () {
@@ -16,25 +18,33 @@ public class GuardController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float dist = agent.remainingDistance;
-		// if (dist!=Mathf.infinite && agent.pathStatus==NavMeshPathStatus.completed && agent.remainingDistance==0)
-		if (agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
-		{
-			if (currentPoint.next)
-			{
-				currentPoint = currentPoint.next;
-				agent.SetDestination(currentPoint.transform.position);
+		foreach (var target in fov.visibleTargets) {
+			var player = target.gameObject.GetComponent<PlayerController>();
+
+			if (player != null) {
+				if (player.inNaughtyZone) {
+					hunted = player;
+					agent.SetDestination(hunted.transform.position);
+				}
 			}
 		}
-		// if (Input.GetMouseButtonDown(0)) {
-		// 	Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-		// 	RaycastHit hit;
-		//
-		// 	if (Physics.Raycast(ray, out hit))
-		// 	{
-		// 		agent.SetDestination(hit.point);
-		// 	}
-		// }
+
+		if (hunted == null) {
+			float dist = agent.remainingDistance;
+			if (agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
+			{
+				if (currentPoint.next)
+				{
+					currentPoint = currentPoint.next;
+					agent.SetDestination(currentPoint.transform.position);
+				}
+			}
+		} else {
+			float dist = agent.remainingDistance;
+			if (dist < .4f) {
+				hunted.gameObject.SetActive(false);
+			}
+		}
 	}
 
 	void OnMouseDown() {
